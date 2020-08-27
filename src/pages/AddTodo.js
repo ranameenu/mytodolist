@@ -4,31 +4,33 @@ class AddTodo extends Component {
   state = {
     dos: "",
   };
+
   onChange = (e) => {
     this.setState({ dos: e.target.value });
   };
-  onChange = () => {};
+
+  onClick = () => {
+    if (this.state.dos !== "") {
+      this.props.addTodo(this.state.dos);
+      this.setState({ dos: "" });
+    }
+  };
 
   render() {
     return (
-      <div>
-        <div className="card mt-3">
-          <div className="card-body">
-            <div className="form-group">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Add Your Todo"
-                onChange={this.onChange}
-              />
-              <submit
-                className="btn btn-primary mt-2"
-                type="submit"
-                onClick={this.onChange}
-              >
-                Add Todo
-              </submit>
-            </div>
+      <div className="card mt-3">
+        <div className="card-body">
+          <div className="form-group">
+            <input
+              className="form-control"
+              type="text"
+              placeholder="Add Your Todo"
+              value={this.state.dos}
+              onChange={this.onChange}
+            />
+            <button className="btn btn-primary mt-2" onClick={this.onClick}>
+              Add Todo
+            </button>
           </div>
         </div>
       </div>

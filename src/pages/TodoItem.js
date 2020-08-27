@@ -1,20 +1,23 @@
 import React, { Component } from "react";
 
 class TodoItem extends Component {
+  onClick = () => {
+    this.props.deleteTodo(this.props.value.id);
+  };
   render() {
-    const { id, dos, completed } = this.props.value;
+    const { id, did, completed } = this.props.value;
+
     return (
-      <div>
-        <li className="list-group-item">
-          {dos}
-          <button className="btn btn-danger btn-sm ml-2 float-right">
-            delete
-          </button>
-          <button className="btn btn-success btn-sm float-right">
-            complete
-          </button>
-        </li>
-      </div>
+      <li className="list-group-item">
+        {did}
+        <button
+          className="btn btn-danger btn-sm ml-2 float-right"
+          onClick={this.onClick}
+        >
+          delete
+        </button>
+        <button className="btn btn-success btn-sm float-right">complete</button>
+      </li>
     );
   }
 }

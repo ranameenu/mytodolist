@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { v4 } from "uuid";
 import Search from "./Search";
 import AddTodo from "./AddTodo";
 import TodoItem from "./TodoItem";
@@ -8,31 +9,51 @@ class Todo extends Component {
     todos: [
       {
         id: 1,
-        dos: "Hey",
+        did: "Hey",
         completed: false,
       },
       {
         id: 2,
-        dos: "World",
+        did: "World",
         completed: false,
       },
       {
         id: 3,
-        dos: "Hello",
+        did: "Hello",
         completed: false,
       },
     ],
   };
+
+  addTodo = (text) => {
+    let copyTodos = this.state.todos;
+    const newTodos = {
+      id: v4(),
+      did: text,
+      completed: false,
+    };
+
+    copyTodos = [...copyTodos, newTodos];
+    this.setState({ todos: copyTodos });
+  };
+
+  deleteTodo = (id) => {
+    let copyTodos = this.state.todos;
+    copyTodos = copyTodos.filter((value) => value.id !== id);
+    this.setState({ todos: copyTodos });
+  };
+
   render() {
     return (
       <div>
-        <AddTodo />
+        <AddTodo addTodo={this.addTodo} />
         <hr />
         <br></br>
         <Search />
+
         <ul className="list-group mt-5">
           {this.state.todos.map((todo) => (
-            <TodoItem key={todo.id} value={todo} />
+            <TodoItem key={todo.id} value={todo} deleteTodo={this.deleteTodo} />
           ))}
         </ul>
       </div>
