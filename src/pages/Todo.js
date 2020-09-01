@@ -43,6 +43,17 @@ class Todo extends Component {
     this.setState({ todos: copyTodos });
   };
 
+  todoComplete = (id) => {
+    let copyTodos = this.state.todos;
+    copyTodos = copyTodos.map((value) => {
+      if (value.id == id) {
+        value.completed = true;
+      }
+      return value;
+    });
+    this.setState({ todos: copyTodos });
+  };
+
   render() {
     return (
       <div>
@@ -53,7 +64,12 @@ class Todo extends Component {
 
         <ul className="list-group mt-5">
           {this.state.todos.map((todo) => (
-            <TodoItem key={todo.id} value={todo} deleteTodo={this.deleteTodo} />
+            <TodoItem
+              key={todo.id}
+              value={todo}
+              deleteTodo={this.deleteTodo}
+              todoComplete={this.todoComplete}
+            />
           ))}
         </ul>
       </div>

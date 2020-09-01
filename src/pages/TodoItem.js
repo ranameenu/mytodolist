@@ -4,6 +4,9 @@ class TodoItem extends Component {
   onClick = () => {
     this.props.deleteTodo(this.props.value.id);
   };
+  onComplete = () => {
+    this.props.todoComplete(this.props.value.id);
+  };
   render() {
     const { id, did, completed } = this.props.value;
 
@@ -16,7 +19,12 @@ class TodoItem extends Component {
         >
           delete
         </button>
-        <button className="btn btn-success btn-sm float-right">complete</button>
+        <button
+          className="btn btn-success btn-sm float-right"
+          onClick={this.onComplete}
+        >
+          {}complete
+        </button>
       </li>
     );
   }
