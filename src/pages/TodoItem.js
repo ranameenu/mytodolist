@@ -23,7 +23,7 @@ class TodoItem extends Component {
           className="btn btn-success btn-sm float-right"
           onClick={this.onComplete}
         >
-          {}complete
+          {completed === true ? "completed" : "complete"}
         </button>
       </li>
     );
